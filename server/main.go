@@ -6,6 +6,7 @@ import (
 )
 
 type items struct {
+	Id    int64  `json:id`
 	Name  string `json:name`
 	Price uint8  `json:price`
 }
@@ -24,14 +25,17 @@ func main() {
 func handleReturnItems(w http.ResponseWriter, r *http.Request) {
 	var backpack = []items{
 		{
+			Id:    1,
 			Name:  "book",
 			Price: 10,
 		},
 		{
+			Id:    2,
 			Name:  "sword",
 			Price: 8,
 		},
 		{
+			Id:    3,
 			Name:  "bow",
 			Price: 12,
 		},
