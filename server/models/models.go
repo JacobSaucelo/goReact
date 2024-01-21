@@ -32,6 +32,10 @@ type TasksCollection struct {
 	Data  []Task `json:data`
 }
 
+type DeleteTask struct {
+	ID int64 `json:id`
+}
+
 type ControllerResponse struct {
 	Message string `json:message`
 	Data    any    `json:data`

@@ -35,6 +35,18 @@ function App() {
       .catch((err) => console.log("error: ", err));
   };
 
+  const handleDelete = async (id: number) => {
+    await fetch(import.meta.env.VITE_SERVER_URL + "delete-todo", {
+      method: "DELETE",
+      body: JSON.stringify({
+        ID: id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log("data: ", data))
+      .catch((err) => console.log("error: ", err));
+  };
+
   return (
     <main>
       <section>heelo wold</section>
@@ -49,6 +61,7 @@ function App() {
             <p>{todo.ID}</p>
             <p>{todo.Title}</p>
             <p>{todo.Description}</p>
+            <button onClick={() => handleDelete(todo.ID)}>delete</button>
           </div>
         ))}
       </section>

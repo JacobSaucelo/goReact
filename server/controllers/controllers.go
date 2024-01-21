@@ -75,3 +75,22 @@ func AddTodoPost(w http.ResponseWriter, r *http.Request) {
 
 	w.Write(response)
 }
+
+func RemoveTodoDelete(w http.ResponseWriter, r *http.Request) {
+	var resBody models.DeleteTask
+	err := json.NewDecoder(r.Body).Decode(&resBody)
+	if err != nil {
+		fmt.Println("SERVER[AddTodoPost]: Error decoding resBody, ", err)
+	}
+
+	// fPath := filepath.Join(folderName, saveFileName)
+
+	response, err := json.Marshal(resBody)
+	if err != nil {
+		fmt.Println("SERVER: Error marshalling save file, ", err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+	}
+
+	w.Write(response)
+
+}
