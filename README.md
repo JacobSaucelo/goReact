@@ -1,2 +1,7 @@
 # goReact
-go reactjs 
+
+go reactjs
+
+- reactjs
+- golang webapi
+- local json as database
