@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"net/http"
 	"path/filepath"
-	"time"
 
 	"com.jacobsaucelo.go-react/models"
 	"com.jacobsaucelo.go-react/utils"
@@ -39,13 +38,40 @@ func AddTodoPost(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("SERVER[AddTodoPost]: Error decoding resBody, ", err)
 	}
 
-	response, err := json.Marshal(resBody)
+	fPath := filepath.Join(folderName, saveFileName)
+	saveData, err := utils.ReadSaveFile(fPath)
+	if err != nil {
+		fmt.Println("SERVER[DisplayTodosGet]: No file found, creating a new one")
+		utils.GenerateSaveFile()
+	}
+
+	addTodo := models.Task{
+		ID:          utils.GenerateTimeBasedId(),
+		Title:       resBody.Title,
+		Description: resBody.Description,
+		DueDate:     resBody.DueDate,
+		Priority:    resBody.Priority,
+		Status:      resBody.Status,
+	}
+
+	saveData.Data = append(saveData.Data, addTodo)
+	saveData.Count = uint32(len(saveData.Data))
+
+	err = utils.SaveFile(fPath, saveData)
+	if err != nil {
+		fmt.Println("SERVER[AddTodoPost]: Error saving json file on add todo", err)
+	}
+
+	var responseData = models.ControllerResponse{
+		Message: "Success",
+		Data:    addTodo,
+	}
+
+	response, err := json.Marshal(responseData)
 	if err != nil {
 		fmt.Println("SERVER: Error marshalling save file, ", err)
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 	}
-
-	fmt.Println(time.Now())
 
 	w.Write(response)
 }

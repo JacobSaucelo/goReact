@@ -28,6 +28,11 @@ type Task struct {
 }
 
 type TasksCollection struct {
-	Count int32  `json:count`
+	Count uint32 `json:count`
 	Data  []Task `json:data`
+}
+
+type ControllerResponse struct {
+	Message string `json:message`
+	Data    any    `json:data`
 }
