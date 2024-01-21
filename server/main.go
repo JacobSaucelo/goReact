@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"net/http"
 )
 
@@ -15,39 +14,38 @@ func main() {
 
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("/", handleReturnItems)
+	// mux.HandleFunc("/", handleReturnItems).Methods("GET")
 
 	middleware := CORSHandler(mux)
-
 	http.ListenAndServe(":3333", middleware)
 }
 
-func handleReturnItems(w http.ResponseWriter, r *http.Request) {
-	var backpack = []items{
-		{
-			Id:    1,
-			Name:  "book",
-			Price: 10,
-		},
-		{
-			Id:    2,
-			Name:  "sword",
-			Price: 8,
-		},
-		{
-			Id:    3,
-			Name:  "bow",
-			Price: 12,
-		},
-	}
-	response, err := json.Marshal(backpack)
-	if err != nil {
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-		return
-	}
+// func handleReturnItems(w http.ResponseWriter, r *http.Request) {
+// 	var backpack = []items{
+// 		{
+// 			Id:    1,
+// 			Name:  "book",
+// 			Price: 10,
+// 		},
+// 		{
+// 			Id:    2,
+// 			Name:  "sword",
+// 			Price: 8,
+// 		},
+// 		{
+// 			Id:    3,
+// 			Name:  "bow",
+// 			Price: 12,
+// 		},
+// 	}
+// 	response, err := json.Marshal(backpack)
+// 	if err != nil {
+// 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+// 		return
+// 	}
 
-	w.Write(response)
-}
+// 	w.Write(response)
+// }
 
 func CORSHandler(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
