@@ -2,6 +2,8 @@ package main
 
 import (
 	"net/http"
+
+	"com.jacobsaucelo.go-react/controllers"
 )
 
 type items struct {
@@ -15,7 +17,7 @@ func main() {
 	mux := http.NewServeMux()
 
 	// mux.HandleFunc("/", handleReturnItems).Methods("GET")
-
+	mux.HandleFunc("/", controllers.DisplayTodosGet)
 	middleware := CORSHandler(mux)
 	http.ListenAndServe(":3333", middleware)
 }
