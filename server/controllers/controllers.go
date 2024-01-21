@@ -9,7 +9,7 @@ import (
 	"com.jacobsaucelo.go-react/utils"
 )
 
-var folderName = "/data/"
+var folderName = "data/"
 var saveFileName = "data.json"
 
 func DisplayTodosGet(w http.ResponseWriter, r *http.Request) {
@@ -18,7 +18,7 @@ func DisplayTodosGet(w http.ResponseWriter, r *http.Request) {
 	saveData, err := utils.ReadSaveFile(fPath)
 	if err != nil {
 		fmt.Println("SERVER[DisplayTodosGet]: No file found, creating a new one")
-
+		utils.GenerateSaveFile()
 	}
 
 	response, err := json.Marshal(saveData)

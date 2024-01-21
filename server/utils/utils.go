@@ -34,10 +34,10 @@ func ReadSaveFile(fpath string) (models.TasksCollection, error) {
 }
 
 func GenerateSaveFile() {
-	generate := []byte(`{"count":0, data: []}`)
-	err := os.WriteFile("/data/data.json", generate, 0644)
+	generate := []byte(`{"Count":0, "Data": []}`)
+	err := os.WriteFile("data/data.json", generate, 0644)
 	if err != nil {
-		fmt.Println("SERVER[GenerateSaveFile]: Error file not generating.")
+		panic("SERVER[GenerateSaveFile]: Error file not generating.")
 	}
 
 	fmt.Println("SERVER[GenerateSaveFile]: Successfully generated file.")
