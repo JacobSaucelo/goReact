@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 function App() {
-  const [todos, setTodos] = useState<any>([]);
+  const [todos, setTodos] = useState<any[]>([]);
   const [todosCount, setTodosCount] = useState<number>(0);
 
   useEffect(() => {
@@ -43,7 +43,12 @@ function App() {
       }),
     })
       .then((res) => res.json())
-      .then((data) => console.log("data: ", data))
+      .then((data) => {
+        console.log("data: ", data);
+
+        setTodos(todos.filter((idD) => idD.ID !== id));
+        setTodosCount(todosCount - 1);
+      })
       .catch((err) => console.log("error: ", err));
   };
 
