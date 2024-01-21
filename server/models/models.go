@@ -26,3 +26,8 @@ type Task struct {
 	Priority    Priority
 	Status      Status
 }
+
+type TasksCollection struct {
+	Count int32  `json:count`
+	Data  []Task `json:data`
+}
