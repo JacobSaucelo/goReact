@@ -17,7 +17,7 @@ func main() {
 	mux := http.NewServeMux()
 
 	// mux.HandleFunc("/", handleReturnItems).Methods("GET")
-	mux.HandleFunc("/", controllers.DisplayTodosGet)
+	mux.HandleFunc("/get-todos", controllers.DisplayTodosGet)
 	mux.HandleFunc("/add-todo", controllers.AddTodoPost)
 	mux.HandleFunc("/delete-todo", controllers.RemoveTodoDelete)
 	mux.HandleFunc("/update-todo", controllers.UpdateTodoPatch)
