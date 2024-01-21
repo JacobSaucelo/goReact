@@ -19,7 +19,7 @@ type Status uint8
 // )
 
 type Task struct {
-	ID          int64     `json:id`
+	ID          string    `json:id`
 	Title       string    `json:title`
 	Description string    `json:description`
 	DueDate     time.Time `json:dueDate`
@@ -33,7 +33,7 @@ type TasksCollection struct {
 }
 
 type DeleteTask struct {
-	ID int64 `json:id`
+	ID string `json:id`
 }
 
 type ControllerResponse struct {

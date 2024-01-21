@@ -22,7 +22,7 @@ function App() {
     await fetch(import.meta.env.VITE_SERVER_URL + "add-todo", {
       method: "POST",
       body: JSON.stringify({
-        ID: 2,
+        ID: "2",
         Title: "jacob",
         Description: "description",
         DueDate: new Date().toISOString(),

@@ -4,14 +4,15 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"strconv"
 	"time"
 
 	"com.jacobsaucelo.go-react/models"
 )
 
-func GenerateTimeBasedId() int64 {
+func GenerateTimeBasedId() string {
 	uid := time.Now().UnixNano()
-	return uid
+	return strconv.Itoa(int(uid))
 }
 
 func ReadSaveFile(fpath string) (models.TasksCollection, error) {

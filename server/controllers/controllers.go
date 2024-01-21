@@ -69,7 +69,7 @@ func AddTodoPost(w http.ResponseWriter, r *http.Request) {
 
 	response, err := json.Marshal(responseData)
 	if err != nil {
-		fmt.Println("SERVER: Error marshalling save file, ", err)
+		fmt.Println("SERVER: Error marshalling response, ", err)
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 	}
 
@@ -83,14 +83,59 @@ func RemoveTodoDelete(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("SERVER[AddTodoPost]: Error decoding resBody, ", err)
 	}
 
-	// fPath := filepath.Join(folderName, saveFileName)
-
-	response, err := json.Marshal(resBody)
+	fPath := filepath.Join(folderName, saveFileName)
+	saveData, err := utils.ReadSaveFile(fPath)
 	if err != nil {
-		fmt.Println("SERVER: Error marshalling save file, ", err)
-		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		fmt.Println("SERVER[RemoveTodoDelete]: No file found, creating a new one")
+		utils.GenerateSaveFile()
 	}
 
-	w.Write(response)
+	var foundIndex int = -1
+	for index, todo := range saveData.Data {
+		if todo.ID == resBody.ID {
+			foundIndex = index
+			break
+		}
+	}
+
+	var responseData = models.ControllerResponse{}
+
+	if foundIndex == -1 {
+		fmt.Println("SERVER[RemoveTodoDelete]: Todo doesnt exists")
+		responseData = models.ControllerResponse{
+			Message: "Error, this todo doesnt exists.",
+			Data:    resBody,
+		}
+
+		response, err := json.Marshal(responseData)
+		if err != nil {
+			fmt.Println("SERVER: Error marshalling response, ", err)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		}
+
+		w.Write(response)
+	} else {
+		saveData.Data[foundIndex] = saveData.Data[len(saveData.Data)-1]
+		saveData.Data = saveData.Data[:len(saveData.Data)-1]
+		saveData.Count = saveData.Count - 1
+
+		err = utils.SaveFile(fPath, saveData)
+		if err != nil {
+			fmt.Println("SERVER[RemoveTodoDelete]: Error saving json file on Remove todo", err)
+		}
+
+		responseData = models.ControllerResponse{
+			Message: "Successfully deleted " + resBody.ID,
+			Data:    saveData,
+		}
+
+		response, err := json.Marshal(responseData)
+		if err != nil {
+			fmt.Println("SERVER: Error marshalling response, ", err)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		}
+
+		w.Write(response)
+	}
 
 }
