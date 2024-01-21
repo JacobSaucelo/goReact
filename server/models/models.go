@@ -19,12 +19,13 @@ type Status uint8
 // )
 
 type Task struct {
-	ID          string    `json:id`
-	Title       string    `json:title`
-	Description string    `json:description`
-	DueDate     time.Time `json:dueDate`
-	Priority    uint8     `json:priority`
-	Status      uint8     `json:status`
+	ID          string     `json:id`
+	Title       string     `json:title`
+	Description string     `json:description`
+	DueDate     time.Time  `json:dueDate`
+	UpdatedDate *time.Time `json:dueDate`
+	Priority    uint8      `json:priority`
+	Status      uint8      `json:status`
 }
 
 type TasksCollection struct {

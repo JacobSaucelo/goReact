@@ -26,6 +26,7 @@ function App() {
         Title: "jacob",
         Description: "description",
         DueDate: new Date().toISOString(),
+        UpdatedDate: null,
         Priority: 1,
         Status: 1,
       }),
@@ -52,6 +53,25 @@ function App() {
       .catch((err) => console.log("error: ", err));
   };
 
+  const handleUpdate = async (id: number) => {
+    await fetch(import.meta.env.VITE_SERVER_URL + "update-todo", {
+      method: "DELETE",
+      body: JSON.stringify({
+        ID: id,
+        Title: "update",
+        Description: "update",
+        UpdatedDate: new Date().toISOString(),
+        Priority: 3,
+        Status: 3,
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Update Data: ", data);
+      })
+      .catch((err) => console.log("error: ", err));
+  };
+
   return (
     <main>
       <section>heelo wold</section>
@@ -63,10 +83,15 @@ function App() {
       <section>
         {todos.map((todo: any) => (
           <div>
-            <p>{todo.ID}</p>
-            <p>{todo.Title}</p>
-            <p>{todo.Description}</p>
+            <p>ID : {todo.ID}</p>
+            <p>Title : {todo.Title}</p>
+            <p>Description : {todo.Description}</p>
+            <p>DueDate : {todo.DueDate}</p>
+            <p>UpdatedDate : {todo.UpdatedDate}</p>
+            <p>Priority : {todo.Priority}</p>
+            <p>Status : {todo.Status}</p>
             <button onClick={() => handleDelete(todo.ID)}>delete</button>
+            <button onClick={() => handleUpdate(todo.ID)}>update</button>
           </div>
         ))}
       </section>
