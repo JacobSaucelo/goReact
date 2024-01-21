@@ -5,7 +5,9 @@ import (
 	"fmt"
 	"net/http"
 	"path/filepath"
+	"time"
 
+	"com.jacobsaucelo.go-react/models"
 	"com.jacobsaucelo.go-react/utils"
 )
 
@@ -26,6 +28,24 @@ func DisplayTodosGet(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("SERVER: Error marshalling save file, ", err)
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 	}
+
+	w.Write(response)
+}
+
+func AddTodoPost(w http.ResponseWriter, r *http.Request) {
+	var resBody models.Task
+	err := json.NewDecoder(r.Body).Decode(&resBody)
+	if err != nil {
+		fmt.Println("SERVER[AddTodoPost]: Error decoding resBody, ", err)
+	}
+
+	response, err := json.Marshal(resBody)
+	if err != nil {
+		fmt.Println("SERVER: Error marshalling save file, ", err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+	}
+
+	fmt.Println(time.Now())
 
 	w.Write(response)
 }

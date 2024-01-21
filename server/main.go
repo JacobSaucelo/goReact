@@ -18,6 +18,7 @@ func main() {
 
 	// mux.HandleFunc("/", handleReturnItems).Methods("GET")
 	mux.HandleFunc("/", controllers.DisplayTodosGet)
+	mux.HandleFunc("/add-todo", controllers.AddTodoPost)
 	middleware := CORSHandler(mux)
 	http.ListenAndServe(":3333", middleware)
 }
