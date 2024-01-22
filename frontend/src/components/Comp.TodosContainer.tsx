@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { TodosType } from "../../types/todos";
-import { Plus } from "lucide-react";
 import CompDisplayTodos from "./Comp.DisplayTodos";
-import { Button } from "@/components/ui/button";
 import CompAddTodo from "./Comp.AddTodo";
 
 export default function CompTodosContainer() {

@@ -3,7 +3,7 @@ export interface TodosType {
   Title: string;
   Description: string;
   DueDate: Date;
-  UpdatedDate: Date;
+  UpdatedDate?: Date;
   Priority: PriorityType;
   Status: StatusType;
 }
