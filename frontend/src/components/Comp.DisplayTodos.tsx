@@ -11,6 +11,10 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import dayjs from "dayjs";
+import {
+  UtilsPriorityDisplay,
+  UtilsStatusDisplay,
+} from "@/utils/Utils.DisplayStats";
 
 export default function CompDisplayTodos({ todos }: { todos: TodosType[] }) {
   return (
@@ -35,8 +39,14 @@ export default function CompDisplayTodos({ todos }: { todos: TodosType[] }) {
           <CardContent>
             <div className="flex justify-between text-xs text-muted-foreground">
               <aside className="flex gap-2 text-sm">
-                <p>Priority {todo.Priority}</p>
-                <p>Status {todo.Status}</p>
+                <p>
+                  Priority
+                  {UtilsPriorityDisplay(todo.Priority)}
+                </p>
+                <p>
+                  Status
+                  {UtilsStatusDisplay(todo.Status)}
+                </p>
               </aside>
               <p className="text-secondary">Ref ID: {todo.ID}</p>
             </div>
