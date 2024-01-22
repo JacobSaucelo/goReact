@@ -8,7 +8,7 @@ export function UtilsPriorityDisplay(priority: number) {
           variant="default"
           className="flex items-center bg-yellow-500 font-bold"
         >
-          <p>Low</p>
+          Low
         </Badge>
       );
     case 2:
@@ -17,7 +17,7 @@ export function UtilsPriorityDisplay(priority: number) {
           variant="default"
           className="flex items-center bg-green-500 font-bold"
         >
-          <p>Medium</p>
+          Medium
         </Badge>
       );
     case 3:
@@ -26,7 +26,7 @@ export function UtilsPriorityDisplay(priority: number) {
           variant="default"
           className="flex items-center bg-red-500 font-bold"
         >
-          <p>High</p>
+          High
         </Badge>
       );
 
@@ -36,7 +36,7 @@ export function UtilsPriorityDisplay(priority: number) {
           variant="default"
           className="flex items-center bg-gray-500 font-bold"
         >
-          <p>Undeclared/Undecided</p>
+          Undeclared/Undecided
         </Badge>
       );
   }

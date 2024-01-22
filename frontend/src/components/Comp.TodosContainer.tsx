@@ -3,6 +3,7 @@ import { TodosType } from "../../types/todos";
 import { Plus } from "lucide-react";
 import CompDisplayTodos from "./Comp.DisplayTodos";
 import { Button } from "@/components/ui/button";
+import CompAddTodo from "./Comp.AddTodo";
 
 export default function CompTodosContainer() {
   const [todos, setTodos] = useState<TodosType[]>([]);
@@ -79,10 +80,7 @@ export default function CompTodosContainer() {
       <article className="mt-5 flex items-center justify-between">
         <h1 className="font-bold text-lg">Total Todos: {todosCount}</h1>
 
-        <Button size="sm" variant="secondary" onClick={handlePost}>
-          <Plus className="mr-2 h-4 w-4" />
-          Add Task
-        </Button>
+        <CompAddTodo handlePost={handlePost} />
       </article>
 
       <hr className="my-2" />
