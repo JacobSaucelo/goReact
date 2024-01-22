@@ -9,7 +9,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Plus, ClipboardList, Underline } from "lucide-react";
+import { Plus, ClipboardList } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -21,15 +21,19 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TodosType } from "types/todos";
+
+type OnChangeType =
+  | React.ChangeEvent<HTMLInputElement>
+  | React.ChangeEvent<HTMLTextAreaElement>;
 
 export default function CompAddTodo({
   handlePost,
   date,
   setDate,
 }: {
-  handlePost: () => void;
+  handlePost: (formData: TodosType) => void;
   date: Date | undefined;
   setDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
 }) {
@@ -42,6 +46,27 @@ export default function CompAddTodo({
     Priority: 1,
     Status: 1,
   });
+
+  useEffect(() => {
+    setFormTodo((prevState) => ({ ...prevState, ["DueDate"]: date as Date }));
+  }, [date]);
+
+  const handleInputChange = (e: OnChangeType) => {
+    const { name, value } = e.target;
+    console.log("name: ", formTodo);
+    setFormTodo((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSelectChange = (value: string, name: string) => {
+    // console.log(name, ": ", value);
+    setFormTodo((prevData) => ({
+      ...prevData,
+      [name]: Number(value),
+    }));
+  };
 
   return (
     <Sheet>
@@ -70,15 +95,22 @@ export default function CompAddTodo({
             <Label htmlFor="name" className="text-right">
               Title
             </Label>
-            <Input id="name" placeholder="Buy milk" className="col-span-3" />
+            <Input
+              name="Title"
+              placeholder="Buy milk"
+              className="col-span-3"
+              onChange={handleInputChange}
+            />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="username" className="text-right">
               Description
             </Label>
             <Textarea
+              name="Description"
               className="col-span-3"
               placeholder="Go to the nearest store and buy milk."
+              onChange={handleInputChange}
             />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
@@ -91,9 +123,13 @@ export default function CompAddTodo({
             <Label htmlFor="username" className="text-right">
               Priority
             </Label>
-            <Select>
+
+            <Select
+              name="Priority"
+              onValueChange={(value) => handleSelectChange(value, "Priority")}
+            >
               <SelectTrigger className="col-span-3">
-                <SelectValue placeholder="Pick your task's priority" />
+                <SelectValue placeholder="Low (Default)" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="3">
@@ -121,9 +157,12 @@ export default function CompAddTodo({
             <Label htmlFor="username" className="text-right">
               Status
             </Label>
-            <Select>
+            <Select
+              name="Status"
+              onValueChange={(value) => handleSelectChange(value, "Status")}
+            >
               <SelectTrigger className="col-span-3">
-                <SelectValue placeholder="Choose what status is it" />
+                <SelectValue placeholder="Pending (Default)" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="4">
@@ -157,7 +196,11 @@ export default function CompAddTodo({
 
         <SheetFooter>
           <SheetClose asChild>
-            <Button size="sm" variant="secondary" onClick={handlePost}>
+            <Button
+              size="sm"
+              variant="secondary"
+              onClick={() => handlePost(formTodo)}
+            >
               Add Task
             </Button>
           </SheetClose>

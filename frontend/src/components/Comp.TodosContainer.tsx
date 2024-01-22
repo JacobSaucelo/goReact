@@ -50,29 +50,44 @@ export default function CompTodosContainer() {
       .catch((err) => console.log("error: ", err));
   };
 
-  const handlePost = async () => {
-    await fetch(import.meta.env.VITE_SERVER_URL + "/add-todo", {
-      method: "POST",
-      body: JSON.stringify({
-        ID: "86",
-        Title: "jacob",
-        Description: "description",
-        DueDate: date,
-        // DueDate:  new Date().toISOString(),
-        UpdatedDate: null,
-        Priority: 1,
-        Status: 1,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        setTodos((prevState) => [...prevState, data.Data]);
-        setTodosCount(todosCount + 1);
+  const handlePost = async (formData: TodosType) => {
+    // const isFormValid = Object.values(formData).every(
+    //   (value) => value.trim() !== ""
+    //   );
+    const isFormValid = Boolean(
+      formData.Title &&
+        formData.Description &&
+        formData.DueDate &&
+        formData.Priority &&
+        formData.Status
+    );
 
-        console.log("data: ", data);
-      })
+    if (isFormValid) {
+      console.log("VALID formData: ", formData, "| dataData: ", date);
+    } else {
+      console.log("NOT-VALID formData: ", formData, "| dataData: ", date);
+    }
 
-      .catch((err) => console.log("error: ", err));
+    // await fetch(import.meta.env.VITE_SERVER_URL + "/add-todo", {
+    //   method: "POST",
+    //   body: JSON.stringify({
+    //     ID: "86",
+    //     Title: "jacob",
+    //     Description: "description",
+    //     DueDate: date,
+    //     // DueDate:  new Date().toISOString(),
+    //     UpdatedDate: null,
+    //     Priority: 1,
+    //     Status: 1,
+    //   }),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setTodos((prevState) => [...prevState, data.Data]);
+    //     setTodosCount(todosCount + 1);
+    //     console.log("data: ", data);
+    //   })
+    //   .catch((err) => console.log("error: ", err));
   };
 
   return (
