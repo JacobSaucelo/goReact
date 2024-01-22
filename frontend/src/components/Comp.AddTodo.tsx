@@ -14,6 +14,13 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { CompCalendar } from "./Comp.Calendar";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function CompAddTodo({
   handlePost,
@@ -63,13 +70,67 @@ export default function CompAddTodo({
             <Label htmlFor="username" className="text-right">
               Priority
             </Label>
-            <Input id="username" value="@peduarte" className="col-span-3" />
+            <Select>
+              <SelectTrigger className="col-span-3">
+                <SelectValue placeholder="Pick your task's priority" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="3">
+                  <div className="flex gap-1">
+                    High
+                    <span className="flex h-3 w-3 translate-y-1 rounded-full bg-red-500" />
+                  </div>
+                </SelectItem>
+                <SelectItem value="2">
+                  <div className="flex gap-1">
+                    Medium
+                    <span className="flex h-3 w-3 translate-y-1 rounded-full bg-green-500" />
+                  </div>
+                </SelectItem>
+                <SelectItem value="1">
+                  <div className="flex gap-1">
+                    Low
+                    <span className="flex h-3 w-3 translate-y-1 rounded-full bg-yellow-500" />
+                  </div>
+                </SelectItem>
+              </SelectContent>
+            </Select>
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="username" className="text-right">
               Status
             </Label>
-            <Input id="username" value="@peduarte" className="col-span-3" />
+            <Select>
+              <SelectTrigger className="col-span-3">
+                <SelectValue placeholder="Choose what status is it" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="4">
+                  <div className="flex gap-1">
+                    Cancelled
+                    <span className="flex h-3 w-3 translate-y-1 rounded-sm bg-red-500" />
+                  </div>
+                </SelectItem>
+                <SelectItem value="3">
+                  <div className="flex gap-1">
+                    Completed
+                    <span className="flex h-3 w-3 translate-y-1 rounded-sm bg-green-500" />
+                  </div>
+                </SelectItem>
+                <SelectItem value="2">
+                  <div className="flex gap-1">
+                    InProgress
+                    <span className="flex h-3 w-3 translate-y-1 rounded-sm bg-blue-500" />
+                  </div>
+                </SelectItem>
+                <SelectItem value="1">
+                  <div className="flex gap-1">
+                    Pending
+                    <span className="flex h-3 w-3 translate-y-1 rounded-sm bg-yellow-500" />
+                  </div>
+                </SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </div>
 
