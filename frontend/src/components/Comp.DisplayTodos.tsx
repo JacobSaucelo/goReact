@@ -10,6 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import dayjs from "dayjs";
 
 export default function CompDisplayTodos({ todos }: { todos: TodosType[] }) {
   return (
@@ -21,12 +22,39 @@ export default function CompDisplayTodos({ todos }: { todos: TodosType[] }) {
         <Card key={todo.ID}>
           <CardHeader>
             <CardTitle className="flex items-center justify-between">
-              <header>{todo.Title}</header>
+              <header className="capitalize">{todo.Title}</header>
               <span className="flex h-3 w-3 translate-y-1 rounded-full bg-sky-500" />
             </CardTitle>
-            <CardDescription>Due at {todo.DueDate}</CardDescription>
+            <CardDescription>
+              Due at{" "}
+              <span className="text-blue-400">
+                {dayjs(todo.DueDate).format("ddd, MMM D, YYYY h:mm A")}
+              </span>
+            </CardDescription>
           </CardHeader>
-          <CardContent>{todo.Description}</CardContent>
+          <CardContent>
+            <div className="flex justify-between text-xs text-muted-foreground">
+              <aside className="flex gap-2 text-sm">
+                <p>Priority {todo.Priority}</p>
+                <p>Status {todo.Status}</p>
+              </aside>
+              <p className="text-secondary">Ref ID: {todo.ID}</p>
+            </div>
+            <p className="text-muted-foreground my-2">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel
+              officiis beatae quis optio vero totam expedita voluptatum, ipsam
+              quaerat delectus!
+              {/* {todo.Description} */}
+            </p>
+            {todo.UpdatedDate && (
+              <p className="text-xs text-muted-foreground">
+                Task updated at{" "}
+                <span className="text-blue-400">
+                  {dayjs(todo.UpdatedDate).format("ddd, MMM D, YYYY h:mm A")}
+                </span>
+              </p>
+            )}
+          </CardContent>
           <CardFooter className="flex gap-2">
             <Button className="w-full" size="sm" variant="default">
               <Check className="mr-2 h-4 w-4" /> Mark as done
