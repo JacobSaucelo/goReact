@@ -1,6 +1,5 @@
-import { Check, Trash2 } from "lucide-react";
+import { Check, SquarePen } from "lucide-react";
 import { TodosType } from "../../types/todos";
-import { ModeToggle } from "./mode-toggle";
 import {
   Card,
   CardContent,
@@ -18,10 +17,7 @@ import {
 
 export default function CompDisplayTodos({ todos }: { todos: TodosType[] }) {
   return (
-    <article>
-      <ModeToggle />
-
-      <h1 className="text-muted-foreground">hwllo</h1>
+    <article className="flex flex-col gap-2">
       {todos.map((todo) => (
         <Card key={todo.ID}>
           <CardHeader>
@@ -70,16 +66,10 @@ export default function CompDisplayTodos({ todos }: { todos: TodosType[] }) {
               <Check className="mr-2 h-4 w-4" /> Mark as done
             </Button>
             <Button className="w-full" size="sm" variant="outline">
-              <Trash2 className="mr-2 h-4 w-4" /> Update task
+              <SquarePen className="mr-2 h-4 w-4" /> Update task
             </Button>
           </CardFooter>
         </Card>
-
-        // <aside >
-        //   <p>{todo.ID}</p>
-        //   <p>{todo.Title}</p>
-        //   <p>{todo.Description}</p>
-        // </aside>
       ))}
     </article>
   );
