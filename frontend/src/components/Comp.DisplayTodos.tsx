@@ -15,7 +15,13 @@ import {
   UtilsStatusDisplay,
 } from "@/utils/Utils.DisplayStats";
 
-export default function CompDisplayTodos({ todos }: { todos: TodosType[] }) {
+export default function CompDisplayTodos({
+  todos,
+  handleDelete,
+}: {
+  todos: TodosType[];
+  handleDelete: (id: string) => void;
+}) {
   return (
     <article className="flex flex-col gap-2">
       {todos.map((todo) => (
@@ -46,12 +52,7 @@ export default function CompDisplayTodos({ todos }: { todos: TodosType[] }) {
               </aside>
               <p className="text-secondary">Ref ID: {todo.ID}</p>
             </div>
-            <p className="text-muted-foreground my-2">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel
-              officiis beatae quis optio vero totam expedita voluptatum, ipsam
-              quaerat delectus!
-              {/* {todo.Description} */}
-            </p>
+            <p className="text-muted-foreground my-2">{todo.Description}</p>
             {todo.UpdatedDate && (
               <p className="text-xs text-muted-foreground">
                 Task updated at{" "}
@@ -62,7 +63,12 @@ export default function CompDisplayTodos({ todos }: { todos: TodosType[] }) {
             )}
           </CardContent>
           <CardFooter className="flex gap-2">
-            <Button className="w-full" size="sm" variant="default">
+            <Button
+              className="w-full"
+              size="sm"
+              variant="default"
+              onClick={() => handleDelete(todo.ID)}
+            >
               <Check className="mr-2 h-4 w-4" /> Mark as done
             </Button>
             <Button className="w-full" size="sm" variant="outline">
