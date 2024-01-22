@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function CompAddTodo({
   handlePost,
@@ -28,25 +29,45 @@ export default function CompAddTodo({
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
-          <SheetTitle>Edit profile</SheetTitle>
+          <SheetTitle>Create New Task</SheetTitle>
           <SheetDescription>
-            Make changes to your profile here. Click save when you're done.
+            Fill up the necessary label to add a task
           </SheetDescription>
         </SheetHeader>
+
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="name" className="text-right">
-              Name
+              Title
             </Label>
             <Input id="name" value="Pedro Duarte" className="col-span-3" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="username" className="text-right">
-              Username
+              Description
+            </Label>
+            <Input id="username" value="@peduarte" className="col-span-3" />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="username" className="text-right">
+              Due Date
+            </Label>
+            <Textarea />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="username" className="text-right">
+              Priority
+            </Label>
+            <Input id="username" value="@peduarte" className="col-span-3" />
+          </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="username" className="text-right">
+              Status
             </Label>
             <Input id="username" value="@peduarte" className="col-span-3" />
           </div>
         </div>
+
         <SheetFooter>
           <SheetClose asChild>
             <Button size="sm" variant="secondary" onClick={handlePost}>
