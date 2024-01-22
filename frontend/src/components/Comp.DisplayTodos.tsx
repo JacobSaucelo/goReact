@@ -39,12 +39,12 @@ export default function CompDisplayTodos({ todos }: { todos: TodosType[] }) {
           <CardContent>
             <div className="flex justify-between text-xs text-muted-foreground">
               <aside className="flex gap-2 text-sm">
-                <p>
-                  Priority
+                <p className="flex gap-1">
+                  <span className="text-white">Priority:</span>
                   {UtilsPriorityDisplay(todo.Priority)}
                 </p>
-                <p>
-                  Status
+                <p className="flex gap-1">
+                  <span className="text-white">Status:</span>
                   {UtilsStatusDisplay(todo.Status)}
                 </p>
               </aside>
