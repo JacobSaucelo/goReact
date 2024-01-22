@@ -9,7 +9,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { Plus, ClipboardList } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -39,26 +39,35 @@ export default function CompAddTodo({
           Create New Task
         </Button>
       </SheetTrigger>
+
       <SheetContent>
         <SheetHeader>
-          <SheetTitle>Create New Task</SheetTitle>
+          <SheetTitle className="flex items-center">
+            <ClipboardList className="mr-2 h-6 w-6" />
+            Create New Task
+          </SheetTitle>
           <SheetDescription>
             Fill up the necessary label to add a task
           </SheetDescription>
         </SheetHeader>
+
+        <hr className="mt-2" />
 
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="name" className="text-right">
               Title
             </Label>
-            <Input id="name" value="Pedro Duarte" className="col-span-3" />
+            <Input id="name" placeholder="Buy milk" className="col-span-3" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="username" className="text-right">
               Description
             </Label>
-            <Textarea className="col-span-3" />
+            <Textarea
+              className="col-span-3"
+              placeholder="Go to the nearest store and buy milk."
+            />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="username" className="text-right">
