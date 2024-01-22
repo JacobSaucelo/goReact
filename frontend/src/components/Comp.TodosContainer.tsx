@@ -10,6 +10,7 @@ export default function CompTodosContainer() {
   const [todosCount, setTodosCount] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
+  const [date, setDate] = useState<Date>();
 
   useEffect(() => {
     handleFetch();
@@ -55,10 +56,11 @@ export default function CompTodosContainer() {
     await fetch(import.meta.env.VITE_SERVER_URL + "/add-todo", {
       method: "POST",
       body: JSON.stringify({
-        ID: "2",
+        ID: "86",
         Title: "jacob",
         Description: "description",
-        DueDate: new Date().toISOString(),
+        DueDate: date,
+        // DueDate:  new Date().toISOString(),
         UpdatedDate: null,
         Priority: 1,
         Status: 1,
@@ -80,7 +82,7 @@ export default function CompTodosContainer() {
       <article className="mt-5 flex items-center justify-between">
         <h1 className="font-bold text-lg">Total Todos: {todosCount}</h1>
 
-        <CompAddTodo handlePost={handlePost} />
+        <CompAddTodo handlePost={handlePost} date={date} setDate={setDate} />
       </article>
 
       <hr className="my-2" />

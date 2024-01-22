@@ -13,11 +13,16 @@ import { Plus } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { CompCalendar } from "./Comp.Calendar";
 
 export default function CompAddTodo({
   handlePost,
+  date,
+  setDate,
 }: {
   handlePost: () => void;
+  date: Date | undefined;
+  setDate: React.Dispatch<React.SetStateAction<Date | undefined>>;
 }) {
   return (
     <Sheet>
@@ -52,7 +57,7 @@ export default function CompAddTodo({
             <Label htmlFor="username" className="text-right">
               Due Date
             </Label>
-            <Input id="username" value="@peduarte" className="col-span-3" />
+            <CompCalendar date={date} setDate={setDate} />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="username" className="text-right">
