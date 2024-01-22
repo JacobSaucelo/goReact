@@ -63,31 +63,30 @@ export default function CompTodosContainer() {
     );
 
     if (isFormValid) {
-      console.log("VALID formData: ", formData, "| dataData: ", date);
+      console.log("VALID");
+      await fetch(import.meta.env.VITE_SERVER_URL + "/add-todo", {
+        method: "POST",
+        body: JSON.stringify({
+          ID: "86",
+          Title: formData.Title,
+          Description: formData.Description,
+          DueDate: date,
+          // DueDate:  new Date().toISOString(),
+          UpdatedDate: null,
+          Priority: formData.Priority,
+          Status: formData.Status,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setTodos((prevState) => [...prevState, data.Data]);
+          setTodosCount(todosCount + 1);
+          console.log("data: ", data);
+        })
+        .catch((err) => console.log("error: ", err));
     } else {
       console.log("NOT-VALID formData: ", formData, "| dataData: ", date);
     }
-
-    // await fetch(import.meta.env.VITE_SERVER_URL + "/add-todo", {
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //     ID: "86",
-    //     Title: "jacob",
-    //     Description: "description",
-    //     DueDate: date,
-    //     // DueDate:  new Date().toISOString(),
-    //     UpdatedDate: null,
-    //     Priority: 1,
-    //     Status: 1,
-    //   }),
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setTodos((prevState) => [...prevState, data.Data]);
-    //     setTodosCount(todosCount + 1);
-    //     console.log("data: ", data);
-    //   })
-    //   .catch((err) => console.log("error: ", err));
   };
 
   return (

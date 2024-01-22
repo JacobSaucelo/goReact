@@ -53,7 +53,6 @@ export default function CompAddTodo({
 
   const handleInputChange = (e: OnChangeType) => {
     const { name, value } = e.target;
-    console.log("name: ", formTodo);
     setFormTodo((prevData) => ({
       ...prevData,
       [name]: value,
@@ -61,7 +60,6 @@ export default function CompAddTodo({
   };
 
   const handleSelectChange = (value: string, name: string) => {
-    // console.log(name, ": ", value);
     setFormTodo((prevData) => ({
       ...prevData,
       [name]: Number(value),
@@ -199,7 +197,19 @@ export default function CompAddTodo({
             <Button
               size="sm"
               variant="secondary"
-              onClick={() => handlePost(formTodo)}
+              onClick={() => {
+                handlePost(formTodo);
+                setFormTodo({
+                  ID: "",
+                  Title: "",
+                  Description: "",
+                  DueDate: new Date(),
+                  UpdatedDate: undefined,
+                  Priority: 1,
+                  Status: 1,
+                });
+                setDate(undefined);
+              }}
             >
               Add Task
             </Button>
