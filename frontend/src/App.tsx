@@ -74,7 +74,11 @@ function App() {
 
   return (
     <main>
-      <CompTodosContainer />
+      <main className="max-w-3xl m-auto">
+        <div className="p-5">
+          <CompTodosContainer />
+        </div>
+      </main>
       {/* <section>heelo wold</section>
       <button onClick={handlePost}>submit test</button>
 

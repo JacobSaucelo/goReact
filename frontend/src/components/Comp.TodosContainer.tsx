@@ -32,7 +32,7 @@ export default function CompTodosContainer() {
   if (error) return <div>error fetching</div>;
 
   return (
-    <section>
+    <section className="border">
       <h1>todosCount: {todosCount}</h1>
       <CompDisplayTodos todos={todos} />
     </section>
