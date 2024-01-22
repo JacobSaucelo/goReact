@@ -46,13 +46,13 @@ export default function CompAddTodo({
             <Label htmlFor="username" className="text-right">
               Description
             </Label>
-            <Input id="username" value="@peduarte" className="col-span-3" />
+            <Textarea className="col-span-3" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="username" className="text-right">
               Due Date
             </Label>
-            <Textarea />
+            <Input id="username" value="@peduarte" className="col-span-3" />
           </div>
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="username" className="text-right">
