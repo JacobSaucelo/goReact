@@ -1,4 +1,4 @@
-import { Check, SquarePen } from "lucide-react";
+import { Check } from "lucide-react";
 import { TodosType } from "../../types/todos";
 import {
   Card,
@@ -14,6 +14,7 @@ import {
   UtilsPriorityDisplay,
   UtilsStatusDisplay,
 } from "@/utils/Utils.DisplayStats";
+import CompUpdateTodo from "./Comp.UpdateTodo";
 
 export default function CompDisplayTodos({
   todos,
@@ -71,9 +72,7 @@ export default function CompDisplayTodos({
             >
               <Check className="mr-2 h-4 w-4" /> Mark as done
             </Button>
-            <Button className="w-full" size="sm" variant="outline">
-              <SquarePen className="mr-2 h-4 w-4" /> Update task
-            </Button>
+            <CompUpdateTodo todo={todo} />
           </CardFooter>
         </Card>
       ))}

@@ -36,7 +36,7 @@ export function UtilsPriorityDisplay(priority: number) {
           variant="default"
           className="flex items-center bg-gray-500 font-bold"
         >
-          Undeclared/Undecided
+          Undecided
         </Badge>
       );
   }
@@ -82,7 +82,7 @@ export function UtilsStatusDisplay(status: number) {
     default:
       return (
         <div className="flex gap-1">
-          Undeclared/Undecided{" "}
+          Undecided{" "}
           <span className="flex h-3 w-3 translate-y-1 rounded-full bg-gray-500" />
         </div>
       );

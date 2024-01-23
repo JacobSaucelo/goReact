@@ -51,9 +51,6 @@ export default function CompTodosContainer() {
   };
 
   const handlePost = async (formData: TodosType) => {
-    // const isFormValid = Object.values(formData).every(
-    //   (value) => value.trim() !== ""
-    //   );
     const isFormValid = Boolean(
       formData.Title &&
         formData.Description &&
@@ -71,7 +68,6 @@ export default function CompTodosContainer() {
           Title: formData.Title,
           Description: formData.Description,
           DueDate: date,
-          // DueDate:  new Date().toISOString(),
           UpdatedDate: null,
           Priority: formData.Priority,
           Status: formData.Status,
@@ -81,7 +77,6 @@ export default function CompTodosContainer() {
         .then((data) => {
           setTodos((prevState) => [...prevState, data.Data]);
           setTodosCount(todosCount + 1);
-          console.log("data: ", data);
         })
         .catch((err) => console.log("error: ", err));
     } else {
