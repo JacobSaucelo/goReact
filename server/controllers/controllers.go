@@ -164,6 +164,8 @@ func UpdateTodoPatch(w http.ResponseWriter, r *http.Request) {
 
 	var responseData = models.ControllerResponse{}
 
+	fmt.Println("resBody: ", resBody)
+
 	if foundIndex == -1 {
 		fmt.Println("SERVER[RemoveTodoDelete]: Todo doesnt exists")
 		responseData = models.ControllerResponse{
@@ -181,6 +183,7 @@ func UpdateTodoPatch(w http.ResponseWriter, r *http.Request) {
 	} else {
 		saveData.Data[foundIndex].Title = resBody.Title
 		saveData.Data[foundIndex].Description = resBody.Description
+		saveData.Data[foundIndex].DueDate = resBody.DueDate
 		saveData.Data[foundIndex].UpdatedDate = resBody.UpdatedDate
 		saveData.Data[foundIndex].Priority = resBody.Priority
 		saveData.Data[foundIndex].Status = resBody.Status

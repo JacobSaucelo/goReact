@@ -75,8 +75,64 @@ export default function CompTodosContainer() {
       })
         .then((res) => res.json())
         .then((data) => {
+          console.log("ADD DATA: ", data);
           setTodos((prevState) => [...prevState, data.Data]);
           setTodosCount(todosCount + 1);
+        })
+        .catch((err) => console.log("error: ", err));
+    } else {
+      console.log("NOT-VALID formData: ", formData, "| dataData: ", date);
+    }
+  };
+
+  const handleUpdate = async (formData: TodosType, newdate: Date) => {
+    const isFormValid = Boolean(
+      formData.Title &&
+        formData.Description &&
+        formData.DueDate &&
+        formData.Priority &&
+        formData.Status
+    );
+
+    console.log(
+      "date",
+      JSON.stringify({
+        ID: formData.ID,
+        Title: formData.Title,
+        Description: formData.Description,
+        DueDate: newdate,
+        UpdatedDate: Date.now(),
+        Priority: formData.Priority,
+        Status: formData.Status,
+      })
+    );
+
+    if (isFormValid) {
+      console.log("VALID");
+      await fetch(import.meta.env.VITE_SERVER_URL + "/update-todo", {
+        method: "POST",
+        body: JSON.stringify({
+          ID: formData.ID,
+          Title: formData.Title,
+          Description: formData.Description,
+          DueDate: newdate,
+          UpdatedDate: Date.now(),
+          Priority: formData.Priority,
+          Status: formData.Status,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("DATA: ", data);
+
+          const updateTodos = todos.map((existingTodo) =>
+            existingTodo.ID === formData.ID
+              ? { ...formData, DueDate: newdate }
+              : existingTodo
+          );
+
+          setTodosCount(todosCount + 1);
+          setTodos(updateTodos);
         })
         .catch((err) => console.log("error: ", err));
     } else {
@@ -94,7 +150,11 @@ export default function CompTodosContainer() {
 
       <hr className="my-2" />
 
-      <CompDisplayTodos todos={todos} handleDelete={handleDelete} />
+      <CompDisplayTodos
+        todos={todos}
+        handleDelete={handleDelete}
+        handleUpdate={handleUpdate}
+      />
     </section>
   );
 }

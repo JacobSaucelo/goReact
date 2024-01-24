@@ -19,9 +19,11 @@ import CompUpdateTodo from "./Comp.UpdateTodo";
 export default function CompDisplayTodos({
   todos,
   handleDelete,
+  handleUpdate,
 }: {
   todos: TodosType[];
   handleDelete: (id: string) => void;
+  handleUpdate: (formData: TodosType, newdate: Date) => void;
 }) {
   return (
     <article className="flex flex-col gap-2">
@@ -72,7 +74,7 @@ export default function CompDisplayTodos({
             >
               <Check className="mr-2 h-4 w-4" /> Mark as done
             </Button>
-            <CompUpdateTodo todo={todo} />
+            <CompUpdateTodo todo={todo} handleUpdate={handleUpdate} />
           </CardFooter>
         </Card>
       ))}

@@ -41,16 +41,21 @@ type OnChangeType =
   | React.ChangeEvent<HTMLInputElement>
   | React.ChangeEvent<HTMLTextAreaElement>;
 
-export default function CompUpdateTodo({ todo }: { todo: TodosType }) {
+export default function CompUpdateTodo({
+  todo,
+  handleUpdate,
+}: {
+  todo: TodosType;
+  handleUpdate: (formData: TodosType, newdate: Date) => void;
+}) {
   const [date, setDate] = useState<Date>();
   const [formTodo, setFormTodo] = useState<TodosType>({
-    ID: "",
-    Title: "",
-    Description: "",
-    DueDate: new Date(),
-    UpdatedDate: undefined,
-    Priority: 1,
-    Status: 1,
+    ID: todo.ID,
+    Title: todo.Title,
+    Description: todo.Description,
+    DueDate: todo.DueDate,
+    Priority: todo.Priority,
+    Status: todo.Status,
   });
 
   useEffect(() => {
@@ -59,7 +64,6 @@ export default function CompUpdateTodo({ todo }: { todo: TodosType }) {
 
   const handleInputChange = (e: OnChangeType) => {
     const { name, value } = e.target;
-    console.log("UPDATE Input: ", name, ":", value);
     setFormTodo((prevData) => ({
       ...prevData,
       [name]: value,
@@ -67,7 +71,6 @@ export default function CompUpdateTodo({ todo }: { todo: TodosType }) {
   };
 
   const handleSelectChange = (value: string, name: string) => {
-    console.log("UPDATE Select: ", name, ":", value);
     setFormTodo((prevData) => ({
       ...prevData,
       [name]: Number(value),
@@ -242,20 +245,17 @@ export default function CompUpdateTodo({ todo }: { todo: TodosType }) {
               size="sm"
               variant="secondary"
               onClick={() => {
-                console.log("formTodo: ", formTodo);
-
-                //   handleUpdate(formTodo);
-                //   setFormTodo({
-                //     ID: "",
-                //     Title: "",
-                //     Description: "",
-                //     DueDate: new Date(),
-                //     UpdatedDate: undefined,
-                //     Priority: 1,
-                //     Status: 1,
-                //   });
-                //   setDate(undefined);
-                //
+                handleUpdate(formTodo, date || todo.DueDate);
+                setFormTodo({
+                  ID: "",
+                  Title: "",
+                  Description: "",
+                  DueDate: new Date(),
+                  UpdatedDate: undefined,
+                  Priority: 1,
+                  Status: 1,
+                });
+                setDate(undefined);
               }}
             >
               Update Task
