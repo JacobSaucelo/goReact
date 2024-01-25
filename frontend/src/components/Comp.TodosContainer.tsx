@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { TodosType } from "../../types/todos";
+import { PriorityType, StatusType, TodosType } from "../../types/todos";
 import CompDisplayTodos from "./Comp.DisplayTodos";
 import CompAddTodo from "./Comp.AddTodo";
 
@@ -94,20 +94,20 @@ export default function CompTodosContainer() {
         formData.Status
     );
 
-    console.log(
-      "date",
-      JSON.stringify({
-        ID: formData.ID,
-        Title: formData.Title,
-        Description: formData.Description,
-        DueDate: newdate,
-        UpdatedDate: Date.now(),
-        Priority: formData.Priority,
-        Status: formData.Status,
-      })
-    );
-
     if (isFormValid) {
+      console.log(
+        "valid input: ",
+        JSON.stringify({
+          ID: formData.ID,
+          Title: formData.Title,
+          Description: formData.Description,
+          DueDate: newdate,
+          UpdatedDate: Date.now(),
+          Priority: formData.Priority as PriorityType,
+          Status: formData.Status as StatusType,
+        })
+      );
+
       console.log("VALID");
       await fetch(import.meta.env.VITE_SERVER_URL + "/update-todo", {
         method: "POST",
@@ -116,9 +116,9 @@ export default function CompTodosContainer() {
           Title: formData.Title,
           Description: formData.Description,
           DueDate: newdate,
-          UpdatedDate: Date.now(),
-          Priority: formData.Priority,
-          Status: formData.Status,
+          UpdatedDate: new Date(),
+          Priority: formData.Priority as PriorityType,
+          Status: formData.Status as StatusType,
         }),
       })
         .then((res) => res.json())
@@ -140,6 +140,28 @@ export default function CompTodosContainer() {
     }
   };
 
+  const updateTest = async () => {
+    const newDate = new Date();
+
+    const value: TodosType = {
+      ID: "1705965979117515800",
+      Title: "update",
+      Description: "update",
+      DueDate: new Date(),
+      UpdatedDate: newDate,
+      Priority: Number("2") as PriorityType,
+      Status: Number("2") as StatusType,
+    };
+
+    await fetch(import.meta.env.VITE_SERVER_URL + "/update-todo", {
+      method: "POST",
+      body: JSON.stringify(value),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log("update test: ", data))
+      .catch((err) => console.log("err: ", err));
+  };
+
   return (
     <section>
       <article className="mt-5 flex items-center justify-between">
@@ -149,6 +171,8 @@ export default function CompTodosContainer() {
       </article>
 
       <hr className="my-2" />
+
+      <button onClick={updateTest}>update</button>
 
       <CompDisplayTodos
         todos={todos}

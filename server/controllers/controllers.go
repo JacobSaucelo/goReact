@@ -81,7 +81,7 @@ func RemoveTodoDelete(w http.ResponseWriter, r *http.Request) {
 	var resBody models.DeleteTask
 	err := json.NewDecoder(r.Body).Decode(&resBody)
 	if err != nil {
-		fmt.Println("SERVER[AddTodoPost]: Error decoding resBody, ", err)
+		fmt.Println("SERVER[RemoveTodoDelete]: Error decoding resBody, ", err)
 	}
 
 	fPath := filepath.Join(folderName, saveFileName)
@@ -144,13 +144,13 @@ func UpdateTodoPatch(w http.ResponseWriter, r *http.Request) {
 	var resBody models.Task
 	err := json.NewDecoder(r.Body).Decode(&resBody)
 	if err != nil {
-		fmt.Println("SERVER[AddTodoPost]: Error decoding resBody, ", err)
+		fmt.Println("SERVER[UpdateTodoPatch]: Error decoding resBody, ", err)
 	}
 
 	fPath := filepath.Join(folderName, saveFileName)
 	saveData, err := utils.ReadSaveFile(fPath)
 	if err != nil {
-		fmt.Println("SERVER[DisplayTodosGet]: No file found, creating a new one")
+		fmt.Println("SERVER[UpdateTodoPatch]: No file found, creating a new one")
 		utils.GenerateSaveFile()
 	}
 
@@ -167,7 +167,7 @@ func UpdateTodoPatch(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("resBody: ", resBody)
 
 	if foundIndex == -1 {
-		fmt.Println("SERVER[RemoveTodoDelete]: Todo doesnt exists")
+		fmt.Println("SERVER[UpdateTodoPatch]: Todo doesnt exists")
 		responseData = models.ControllerResponse{
 			Message: "Error, this todo doesnt exists.",
 			Data:    resBody,
@@ -190,7 +190,7 @@ func UpdateTodoPatch(w http.ResponseWriter, r *http.Request) {
 
 		err = utils.SaveFile(fPath, saveData)
 		if err != nil {
-			fmt.Println("SERVER[RemoveTodoDelete]: Error saving json file on Remove todo", err)
+			fmt.Println("SERVER[UpdateTodoPatch]: Error saving json file on Remove todo", err)
 		}
 
 		responseData = models.ControllerResponse{
