@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"path/filepath"
+	"strings"
 
 	"com.jacobsaucelo.go-react/models"
 	"com.jacobsaucelo.go-react/utils"
@@ -206,4 +207,19 @@ func UpdateTodoPatch(w http.ResponseWriter, r *http.Request) {
 
 		w.Write(response)
 	}
+}
+
+func GetProject(w http.ResponseWriter, r *http.Request) {
+	// Extract the projectId from the URL path
+	pathParts := strings.Split(r.URL.Path, "/")
+	if len(pathParts) < 3 {
+		http.Error(w, "Invalid URL", http.StatusBadRequest)
+		return
+	}
+
+	fmt.Println("pathParts:", pathParts)
+
+	projectId := pathParts[2]
+	fmt.Println("projectId:", projectId)
+	fmt.Fprintf(w, "Getting project with ID: %s", projectId)
 }

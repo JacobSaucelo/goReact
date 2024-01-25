@@ -162,6 +162,15 @@ export default function CompTodosContainer() {
       .catch((err) => console.log("err: ", err));
   };
 
+  const getProjTest = async () => {
+    await fetch(
+      import.meta.env.VITE_SERVER_URL + "/get-project/" + "1705965979117515800"
+    )
+      .then((res) => res.json())
+      .then((data) => console.log("update test: ", data))
+      .catch((err) => console.log("err: ", err));
+  };
+
   return (
     <section>
       <article className="mt-5 flex items-center justify-between">
@@ -173,6 +182,7 @@ export default function CompTodosContainer() {
       <hr className="my-2" />
 
       <button onClick={updateTest}>update</button>
+      <button onClick={getProjTest}>getProjTest</button>
 
       <CompDisplayTodos
         todos={todos}

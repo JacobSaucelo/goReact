@@ -21,6 +21,7 @@ func main() {
 	mux.HandleFunc("/add-todo", controllers.AddTodoPost)
 	mux.HandleFunc("/delete-todo", controllers.RemoveTodoDelete)
 	mux.HandleFunc("/update-todo", controllers.UpdateTodoPatch)
+	mux.HandleFunc("/get-project/", controllers.GetProject)
 	middleware := CORSHandler(mux)
 	http.ListenAndServe(":3333", middleware)
 }
