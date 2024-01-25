@@ -19,7 +19,6 @@ export default function CompTodosContainer() {
       .then((res) => res.json())
       .then((data) => {
         setIsLoading(false);
-
         setTodos(data.Data);
         setTodosCount(data.Count);
       })
