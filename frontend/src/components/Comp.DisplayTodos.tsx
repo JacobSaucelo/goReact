@@ -74,7 +74,7 @@ export default function CompDisplayTodos({
             >
               <Check className="mr-2 h-4 w-4" /> Mark as done
             </Button>
-            <CompUpdateTodo todo={todo} handleUpdate={handleUpdate} />
+            <CompUpdateTodo handleUpdate={handleUpdate} todoID={todo.ID} />
           </CardFooter>
         </Card>
       ))}

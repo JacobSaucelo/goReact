@@ -42,24 +42,24 @@ type OnChangeType =
   | React.ChangeEvent<HTMLTextAreaElement>;
 
 export default function CompUpdateTodo({
-  todo,
   handleUpdate,
+  todoID,
 }: {
-  todo: TodosType;
   handleUpdate: (formData: TodosType, newdate: Date) => void;
+  todoID: string;
 }) {
   const [date, setDate] = useState<Date>();
   const [formTodo, setFormTodo] = useState<TodosType>({
-    ID: todo.ID,
-    Title: todo.Title,
-    Description: todo.Description,
-    DueDate: todo.DueDate,
-    Priority: todo.Priority,
-    Status: todo.Status,
+    ID: "",
+    Title: "",
+    Description: "",
+    DueDate: new Date(),
+    Priority: 1,
+    Status: 1,
   });
 
   useEffect(() => {
-    setFormTodo(todo);
+    handleFetchUpdate();
   }, []);
 
   const handleInputChange = (e: OnChangeType) => {
@@ -75,6 +75,15 @@ export default function CompUpdateTodo({
       ...prevData,
       [name]: Number(value),
     }));
+  };
+
+  const handleFetchUpdate = async () => {
+    await fetch(import.meta.env.VITE_SERVER_URL + "/get-project/" + todoID)
+      .then((res) => res.json())
+      .then((data) => {
+        setFormTodo(data.Data);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -245,7 +254,7 @@ export default function CompUpdateTodo({
               size="sm"
               variant="secondary"
               onClick={() => {
-                handleUpdate(formTodo, date || todo.DueDate);
+                handleUpdate(formTodo, date || formTodo.DueDate);
                 setFormTodo({
                   ID: "",
                   Title: "",

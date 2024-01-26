@@ -210,16 +210,58 @@ func UpdateTodoPatch(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetProject(w http.ResponseWriter, r *http.Request) {
-	// Extract the projectId from the URL path
 	pathParts := strings.Split(r.URL.Path, "/")
 	if len(pathParts) < 3 {
 		http.Error(w, "Invalid URL", http.StatusBadRequest)
 		return
 	}
 
-	fmt.Println("pathParts:", pathParts)
-
 	projectId := pathParts[2]
-	fmt.Println("projectId:", projectId)
-	fmt.Fprintf(w, "Getting project with ID: %s", projectId)
+
+	fPath := filepath.Join(folderName, saveFileName)
+	saveData, err := utils.ReadSaveFile(fPath)
+	if err != nil {
+		fmt.Println("SERVER[RemoveTodoDelete]: No file found, creating a new one")
+		utils.GenerateSaveFile()
+	}
+
+	var foundIndex int = -1
+	for index, todo := range saveData.Data {
+		if todo.ID == projectId {
+			foundIndex = index
+			break
+		}
+	}
+
+	var responseData = models.ControllerResponse{}
+
+	if foundIndex == -1 {
+		fmt.Println("SERVER[RemoveTodoDelete]: Todo doesnt exists")
+		responseData = models.ControllerResponse{
+			Message: "Error, this todo doesnt exists.",
+			Data:    projectId,
+		}
+
+		response, err := json.Marshal(responseData)
+		if err != nil {
+			fmt.Println("SERVER: Error marshalling response, ", err)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		}
+
+		w.Write(response)
+	} else {
+		responseData = models.ControllerResponse{
+			Message: "Successfully fetched " + projectId,
+			Data:    saveData.Data[foundIndex],
+		}
+
+		response, err := json.Marshal(responseData)
+		if err != nil {
+			fmt.Println("SERVER: Error marshalling response, ", err)
+			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		}
+
+		w.Write(response)
+	}
+
 }
