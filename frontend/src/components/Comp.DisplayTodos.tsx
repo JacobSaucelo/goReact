@@ -60,8 +60,8 @@ export default function CompDisplayTodos({ todos }: { todos: TodosType[] }) {
             )}
           </CardContent>
           <CardFooter className="flex flex-col gap-2 sm:flex-row">
-            <Button className="w-full" size="sm" variant="default">
-              <Link to={"delete/" + todo.ID}>
+            <Button className="w-full" size="sm" variant="default" asChild>
+              <Link to={"done/" + todo.ID}>
                 <p className="flex items-center">
                   <Check className="mr-2 h-4 w-4" /> Mark as done
                 </p>

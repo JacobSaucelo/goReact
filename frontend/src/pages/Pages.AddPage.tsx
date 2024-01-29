@@ -73,113 +73,126 @@ export default function PagesAddPage() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="name" className="text-right">
-          Title
-        </Label>
-        <Input
-          name="Title"
-          placeholder="Buy milk"
-          className="col-span-3"
-          onChange={handleInputChange}
-          required
-        />
+    <section>
+      <header className="bg-gradient-to-r from-blue-600 rounded-xl flex items-center justify-evenly p-2">
+        <img src="/create.png" height="100" width="100" />
+        <aside>
+          <h1 className="text-3xl font-semibold">Plan Your Next Task</h1>
+          <p>Fill in the form to create your task.</p>
+        </aside>
+      </header>
 
-        <Label htmlFor="name" className="text-right">
-          Description
-        </Label>
-        <Textarea
-          name="Description"
-          className="col-span-3"
-          placeholder="Go to the nearest store and buy milk."
-          onChange={handleInputChange}
-          required
-        />
+      <form onSubmit={handleSubmit}>
+        <div className="grid grid-cols-4 items-center gap-4">
+          <Label htmlFor="name" className="text-right">
+            Title
+          </Label>
+          <Input
+            name="Title"
+            placeholder="Buy milk"
+            className="col-span-3"
+            onChange={handleInputChange}
+            required
+          />
 
-        <Label htmlFor="name" className="text-right">
-          Due Date
-        </Label>
-        <CompCalendar date={date} setDate={setDate} />
+          <Label htmlFor="name" className="text-right">
+            Description
+          </Label>
+          <Textarea
+            name="Description"
+            className="col-span-3"
+            placeholder="Go to the nearest store and buy milk."
+            onChange={handleInputChange}
+            required
+          />
 
-        <Label htmlFor="name" className="text-right">
-          Priority
-        </Label>
-        <Select
-          name="Priority"
-          onValueChange={(value) => handleSelectChange(value, "Priority")}
-          required
-        >
-          <SelectTrigger className="col-span-3">
-            <SelectValue placeholder="Low (Default)" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="3">
-              <div className="flex gap-1">
-                High
-                <span className="flex h-3 w-3 translate-y-1 rounded-full bg-red-500" />
-              </div>
-            </SelectItem>
-            <SelectItem value="2">
-              <div className="flex gap-1">
-                Medium
-                <span className="flex h-3 w-3 translate-y-1 rounded-full bg-green-500" />
-              </div>
-            </SelectItem>
-            <SelectItem value="1">
-              <div className="flex gap-1">
-                Low
-                <span className="flex h-3 w-3 translate-y-1 rounded-full bg-yellow-500" />
-              </div>
-            </SelectItem>
-          </SelectContent>
-        </Select>
+          <Label htmlFor="name" className="text-right">
+            Due Date
+          </Label>
+          <CompCalendar date={date} setDate={setDate} />
 
-        <Label htmlFor="name" className="text-right">
-          Status
-        </Label>
-        <Select
-          name="Status"
-          onValueChange={(value) => handleSelectChange(value, "Status")}
-          required
-        >
-          <SelectTrigger className="col-span-3">
-            <SelectValue placeholder="Pending (Default)" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="4">
-              <div className="flex gap-1">
-                Cancelled
-                <span className="flex h-3 w-3 translate-y-1 rounded-sm bg-red-500" />
-              </div>
-            </SelectItem>
-            <SelectItem value="3">
-              <div className="flex gap-1">
-                Completed
-                <span className="flex h-3 w-3 translate-y-1 rounded-sm bg-green-500" />
-              </div>
-            </SelectItem>
-            <SelectItem value="2">
-              <div className="flex gap-1">
-                InProgress
-                <span className="flex h-3 w-3 translate-y-1 rounded-sm bg-blue-500" />
-              </div>
-            </SelectItem>
-            <SelectItem value="1">
-              <div className="flex gap-1">
-                Pending
-                <span className="flex h-3 w-3 translate-y-1 rounded-sm bg-yellow-500" />
-              </div>
-            </SelectItem>
-          </SelectContent>
-        </Select>
+          <Label htmlFor="name" className="text-right">
+            Priority
+          </Label>
+          <Select
+            name="Priority"
+            onValueChange={(value) => handleSelectChange(value, "Priority")}
+            required
+          >
+            <SelectTrigger className="col-span-3">
+              <SelectValue placeholder="Low (Default)" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="3">
+                <div className="flex gap-1">
+                  High
+                  <span className="flex h-3 w-3 translate-y-1 rounded-full bg-red-500" />
+                </div>
+              </SelectItem>
+              <SelectItem value="2">
+                <div className="flex gap-1">
+                  Medium
+                  <span className="flex h-3 w-3 translate-y-1 rounded-full bg-green-500" />
+                </div>
+              </SelectItem>
+              <SelectItem value="1">
+                <div className="flex gap-1">
+                  Low
+                  <span className="flex h-3 w-3 translate-y-1 rounded-full bg-yellow-500" />
+                </div>
+              </SelectItem>
+            </SelectContent>
+          </Select>
 
-        {validation && "Error validation "}
+          <Label htmlFor="name" className="text-right">
+            Status
+          </Label>
+          <Select
+            name="Status"
+            onValueChange={(value) => handleSelectChange(value, "Status")}
+            required
+          >
+            <SelectTrigger className="col-span-3">
+              <SelectValue placeholder="Pending (Default)" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="4">
+                <div className="flex gap-1">
+                  Cancelled
+                  <span className="flex h-3 w-3 translate-y-1 rounded-sm bg-red-500" />
+                </div>
+              </SelectItem>
+              <SelectItem value="3">
+                <div className="flex gap-1">
+                  Completed
+                  <span className="flex h-3 w-3 translate-y-1 rounded-sm bg-green-500" />
+                </div>
+              </SelectItem>
+              <SelectItem value="2">
+                <div className="flex gap-1">
+                  InProgress
+                  <span className="flex h-3 w-3 translate-y-1 rounded-sm bg-blue-500" />
+                </div>
+              </SelectItem>
+              <SelectItem value="1">
+                <div className="flex gap-1">
+                  Pending
+                  <span className="flex h-3 w-3 translate-y-1 rounded-sm bg-yellow-500" />
+                </div>
+              </SelectItem>
+            </SelectContent>
+          </Select>
 
-        <div className="col-span-4 flex items-center justify-center">
-          <Button className="min-w-[200px]">Add todo</Button>
+          {validation && "Error validation "}
+
+          <div className="col-span-4 flex gap-2 items-center justify-center">
+            <Button className="min-w-[200px]">Add todo</Button>
+            <Button className="min-w-[200px]" onClick={() => navigate("/")}>
+              Cancel
+            </Button>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </section>
   );
 }

@@ -48,6 +48,14 @@ export function UtilsPriorityDisplay(priority: number) {
 // 	Low    Priority = 1
 // )
 
+// export type StatusType = 1 | 2 | 3 | 4;
+// const (
+// 	Cancelled  Status = 4
+// 	Completed  Status = 3
+// 	InProgress Status = 2
+// 	Pending    Status = 1
+// )
+
 export function UtilsStatusDisplay(status: number, displayName: boolean) {
   switch (status) {
     case 1:
@@ -88,10 +96,3 @@ export function UtilsStatusDisplay(status: number, displayName: boolean) {
       );
   }
 }
-// export type StatusType = 1 | 2 | 3 | 4;
-// const (
-// 	Cancelled  Status = 4
-// 	Completed  Status = 3
-// 	InProgress Status = 2
-// 	Pending    Status = 1
-// )
