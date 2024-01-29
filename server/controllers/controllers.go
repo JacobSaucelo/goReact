@@ -51,7 +51,7 @@ func AddTodoPost(w http.ResponseWriter, r *http.Request) {
 		Title:       resBody.Title,
 		Description: resBody.Description,
 		DueDate:     resBody.DueDate,
-		UpdatedDate: resBody.UpdatedDate,
+		UpdatedDate: nil,
 		Priority:    resBody.Priority,
 		Status:      resBody.Status,
 	}

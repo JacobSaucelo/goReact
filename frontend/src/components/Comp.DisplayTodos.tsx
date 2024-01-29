@@ -18,13 +18,13 @@ import { Link } from "react-router-dom";
 
 export default function CompDisplayTodos({ todos }: { todos: TodosType[] }) {
   return (
-    <article className="flex flex-col gap-2 p-2">
+    <article className="flex flex-col gap-2 my-4">
       {todos.map((todo) => (
         <Card key={todo.ID}>
           <CardHeader>
             <CardTitle className="flex items-center justify-between">
               <header className="capitalize">{todo.Title}</header>
-              {UtilsStatusDisplay(todo.Status)}
+              {UtilsStatusDisplay(todo.Status, false)}
 
               {/* <span className="flex h-3 w-3 translate-y-1 rounded-full bg-sky-500" /> */}
             </CardTitle>
@@ -36,11 +36,17 @@ export default function CompDisplayTodos({ todos }: { todos: TodosType[] }) {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="flex flex-col justify-between text-xs text-muted-foreground sm:flex-row">
-              <p className="flex gap-1">
-                <span className="text-sm text-muted-foreground">Priority:</span>
-                {UtilsPriorityDisplay(todo.Priority)}
-              </p>
+            <div className="flex flex-col gap-2 justify-between text-xs text-muted-foreground sm:flex-row">
+              <aside className="flex gap-2 flex-wrap">
+                <p className="flex items-center gap-1">
+                  <span className="text-muted-foreground">Priority:</span>
+                  {UtilsPriorityDisplay(todo.Priority)}
+                </p>
+                <p className="flex items-center gap-1">
+                  <span className="text-muted-foreground">Status:</span>
+                  {UtilsStatusDisplay(todo.Status, true)}
+                </p>
+              </aside>
               <p className="text-secondary">Ref ID: {todo.ID}</p>
             </div>
             <p className="my-2 py-3">{todo.Description}</p>

@@ -3,7 +3,7 @@ export interface TodosType {
   Title: string;
   Description: string;
   DueDate: Date;
-  UpdatedDate?: Date;
+  UpdatedDate?: Date | null;
   Priority: PriorityType;
   Status: StatusType;
 }
@@ -22,3 +22,7 @@ export type StatusType = 1 | 2 | 3 | 4;
 // 	InProgress Status = 2
 // 	Pending    Status = 1
 // )
+
+export type OnChangeType =
+  | React.ChangeEvent<HTMLInputElement>
+  | React.ChangeEvent<HTMLTextAreaElement>;

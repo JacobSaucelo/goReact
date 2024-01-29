@@ -48,29 +48,33 @@ export function UtilsPriorityDisplay(priority: number) {
 // 	Low    Priority = 1
 // )
 
-export function UtilsStatusDisplay(status: number) {
+export function UtilsStatusDisplay(status: number, displayName: boolean) {
   switch (status) {
     case 1:
       return (
         <div className="flex gap-1">
+          {displayName && "Pending"}
           <span className="flex h-3 w-3 translate-y-1 rounded-full bg-yellow-500" />
         </div>
       );
     case 2:
       return (
         <div className="flex gap-1">
+          {displayName && "InProgress"}
           <span className="flex h-3 w-3 translate-y-1 rounded-full bg-blue-500" />
         </div>
       );
     case 3:
       return (
         <div className="flex gap-1">
+          {displayName && "Completed"}
           <span className="flex h-3 w-3 translate-y-1 rounded-full bg-green-500" />
         </div>
       );
     case 4:
       return (
         <div className="flex gap-1">
+          {displayName && "Cancelled"}
           <span className="flex h-3 w-3 translate-y-1 rounded-full bg-red-500" />
         </div>
       );
@@ -78,6 +82,7 @@ export function UtilsStatusDisplay(status: number) {
     default:
       return (
         <div className="flex gap-1">
+          Undecided
           <span className="flex h-3 w-3 translate-y-1 rounded-full bg-gray-500" />
         </div>
       );
