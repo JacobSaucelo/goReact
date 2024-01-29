@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { PriorityType, StatusType, TodosType } from "../../types/todos";
 import CompDisplayTodos from "./Comp.DisplayTodos";
 import CompAddTodo from "./Comp.AddTodo";
+import { Button } from "./ui/button";
+import { Plus } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function CompTodosContainer() {
   const [todos, setTodos] = useState<TodosType[]>([]);
@@ -59,7 +62,6 @@ export default function CompTodosContainer() {
     );
 
     if (isFormValid) {
-      console.log("VALID");
       await fetch(import.meta.env.VITE_SERVER_URL + "/add-todo", {
         method: "POST",
         body: JSON.stringify({
@@ -175,19 +177,15 @@ export default function CompTodosContainer() {
       <article className="mt-5 flex items-center justify-between">
         <h1 className="font-bold text-lg">Total Todos: {todosCount}</h1>
 
-        <CompAddTodo handlePost={handlePost} date={date} setDate={setDate} />
+        <Button size="sm" variant="secondary" asChild>
+          <Link to="/add-todo">
+            <Plus className="mr-2 h-4 w-4" />
+            Create New Task
+          </Link>
+        </Button>
       </article>
 
-      <hr className="my-2" />
-
-      <button onClick={updateTest}>update</button>
-      <button onClick={getProjTest}>getProjTest</button>
-
-      <CompDisplayTodos
-        todos={todos}
-        handleDelete={handleDelete}
-        handleUpdate={handleUpdate}
-      />
+      <CompDisplayTodos todos={todos} />
     </section>
   );
 }

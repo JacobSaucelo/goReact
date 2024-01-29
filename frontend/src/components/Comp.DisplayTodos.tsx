@@ -14,26 +14,19 @@ import {
   UtilsPriorityDisplay,
   UtilsStatusDisplay,
 } from "@/utils/Utils.DisplayStats";
-import CompUpdateTodo from "./Comp.UpdateTodo";
 import { Link } from "react-router-dom";
 
-export default function CompDisplayTodos({
-  todos,
-  handleDelete,
-  handleUpdate,
-}: {
-  todos: TodosType[];
-  handleDelete: (id: string) => void;
-  handleUpdate: (formData: TodosType, newdate: Date) => void;
-}) {
+export default function CompDisplayTodos({ todos }: { todos: TodosType[] }) {
   return (
-    <article className="flex flex-col gap-2">
+    <article className="flex flex-col gap-2 p-2">
       {todos.map((todo) => (
         <Card key={todo.ID}>
           <CardHeader>
             <CardTitle className="flex items-center justify-between">
               <header className="capitalize">{todo.Title}</header>
-              <span className="flex h-3 w-3 translate-y-1 rounded-full bg-sky-500" />
+              {UtilsStatusDisplay(todo.Status)}
+
+              {/* <span className="flex h-3 w-3 translate-y-1 rounded-full bg-sky-500" /> */}
             </CardTitle>
             <CardDescription>
               Due at{" "}
@@ -43,20 +36,14 @@ export default function CompDisplayTodos({
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="flex justify-between text-xs text-muted-foreground">
-              <aside className="flex gap-2 text-sm">
-                <p className="flex gap-1">
-                  <span className="text-white">Priority:</span>
-                  {UtilsPriorityDisplay(todo.Priority)}
-                </p>
-                <p className="flex gap-1">
-                  <span className="text-white">Status:</span>
-                  {UtilsStatusDisplay(todo.Status)}
-                </p>
-              </aside>
+            <div className="flex flex-col justify-between text-xs text-muted-foreground sm:flex-row">
+              <p className="flex gap-1">
+                <span className="text-sm text-muted-foreground">Priority:</span>
+                {UtilsPriorityDisplay(todo.Priority)}
+              </p>
               <p className="text-secondary">Ref ID: {todo.ID}</p>
             </div>
-            <p className="text-muted-foreground my-2">{todo.Description}</p>
+            <p className="my-2 py-3">{todo.Description}</p>
             {todo.UpdatedDate && (
               <p className="text-xs text-muted-foreground">
                 Task updated at{" "}
@@ -66,19 +53,20 @@ export default function CompDisplayTodos({
               </p>
             )}
           </CardContent>
-          <CardFooter className="flex gap-2">
-            <Button
-              className="w-full"
-              size="sm"
-              variant="default"
-              onClick={() => handleDelete(todo.ID)}
-            >
-              <Check className="mr-2 h-4 w-4" /> Mark as done
+          <CardFooter className="flex flex-col gap-2 sm:flex-row">
+            <Button className="w-full" size="sm" variant="default">
+              <Link to={"delete/" + todo.ID}>
+                <p className="flex items-center">
+                  <Check className="mr-2 h-4 w-4" /> Mark as done
+                </p>
+              </Link>
             </Button>
 
             <Button className="w-full" size="sm" variant="outline" asChild>
               <Link to={"update/" + todo.ID}>
-                <SquarePen className="mr-2 h-4 w-4" /> Update task
+                <p className="flex items-center">
+                  <SquarePen className="mr-2 h-4 w-4" /> Update task
+                </p>
               </Link>
             </Button>
             {/* <CompUpdateTodo handleUpdate={handleUpdate} todoID={todo.ID} /> */}
