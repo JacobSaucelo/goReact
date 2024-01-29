@@ -1,4 +1,4 @@
-import { Check } from "lucide-react";
+import { Check, SquarePen } from "lucide-react";
 import { TodosType } from "../../types/todos";
 import {
   Card,
@@ -15,6 +15,7 @@ import {
   UtilsStatusDisplay,
 } from "@/utils/Utils.DisplayStats";
 import CompUpdateTodo from "./Comp.UpdateTodo";
+import { Link } from "react-router-dom";
 
 export default function CompDisplayTodos({
   todos,
@@ -74,7 +75,13 @@ export default function CompDisplayTodos({
             >
               <Check className="mr-2 h-4 w-4" /> Mark as done
             </Button>
-            <CompUpdateTodo handleUpdate={handleUpdate} todoID={todo.ID} />
+
+            <Button className="w-full" size="sm" variant="outline" asChild>
+              <Link to={"update/" + todo.ID}>
+                <SquarePen className="mr-2 h-4 w-4" /> Update task
+              </Link>
+            </Button>
+            {/* <CompUpdateTodo handleUpdate={handleUpdate} todoID={todo.ID} /> */}
           </CardFooter>
         </Card>
       ))}
