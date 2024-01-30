@@ -5,6 +5,8 @@ import CompAddTodo from "./Comp.AddTodo";
 import { Button } from "./ui/button";
 import { Plus } from "lucide-react";
 import { Link } from "react-router-dom";
+import { DataTable } from "@/tableData/data-table";
+import { columns } from "@/tableData/columns";
 
 export default function CompTodosContainer() {
   const [todos, setTodos] = useState<TodosType[]>([]);
@@ -36,18 +38,7 @@ export default function CompTodosContainer() {
 
   return (
     <section>
-      <article className="mt-5 flex items-center justify-between">
-        <h1 className="font-bold text-lg">Total Todos: {todosCount}</h1>
-
-        <Button size="sm" variant="secondary" asChild>
-          <Link to="/add-todo">
-            <Plus className="mr-2 h-4 w-4" />
-            Create New Task
-          </Link>
-        </Button>
-      </article>
-
-      <CompDisplayTodos todos={todos} />
+      <DataTable columns={columns} data={todos} />
     </section>
   );
 }

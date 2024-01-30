@@ -77,12 +77,12 @@ export default function PagesAddPage() {
       <header className="bg-gradient-to-r from-blue-600 rounded-xl flex items-center justify-evenly p-2">
         <img src="/create.png" height="100" width="100" />
         <aside>
-          <h1 className="text-3xl font-semibold">Plan Your Next Task</h1>
-          <p>Fill in the form to create your task.</p>
+          <h1 className="text-3xl font-semibold">Create New Task</h1>
+          <p>Plan Your Next Task, fill in the form to create your task.</p>
         </aside>
       </header>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="mt-4">
         <div className="grid grid-cols-4 items-center gap-4">
           <Label htmlFor="name" className="text-right">
             Title
@@ -187,7 +187,11 @@ export default function PagesAddPage() {
 
           <div className="col-span-4 flex gap-2 items-center justify-center">
             <Button className="min-w-[200px]">Add todo</Button>
-            <Button className="min-w-[200px]" onClick={() => navigate("/")}>
+            <Button
+              className="min-w-[200px]"
+              variant="outline"
+              onClick={() => navigate("/")}
+            >
               Cancel
             </Button>
           </div>

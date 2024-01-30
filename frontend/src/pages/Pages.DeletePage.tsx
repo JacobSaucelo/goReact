@@ -1,9 +1,5 @@
+import CompCard from "@/components/Comp.Card";
 import { Button } from "@/components/ui/button";
-import {
-  UtilsPriorityDisplay,
-  UtilsStatusDisplay,
-} from "@/utils/Utils.DisplayStats";
-import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { TodosType } from "types/todos";
@@ -63,7 +59,8 @@ export default function PagesDeletePage() {
 
   return (
     <section>
-      <p>ID: {formData.ID}</p>
+      <CompCard todo={formData} />
+      {/* <p>ID: {formData.ID}</p>
       <p>Title: {formData.Title}</p>
       <p>Description: {formData.Description}</p>
       <p>
@@ -81,13 +78,20 @@ export default function PagesDeletePage() {
       <h1 className="text-2xl">Done with this task. Confirm completion?</h1>
       <p className="text-sm">
         Heads up: Task will be permanently deleted upon marking as 'Done'.
-      </p>
-      <Button className="min-w-[200px]" onClick={handleDelete}>
-        Done
-      </Button>
-      <Button className="min-w-[200px]" onClick={() => navigate("/")}>
-        Cancel
-      </Button>
+      </p> */}
+
+      <aside className="flex items-center justify-center gap-2 p-2">
+        <Button className="min-w-[200px]" onClick={handleDelete}>
+          Done
+        </Button>
+        <Button
+          className="min-w-[200px]"
+          onClick={() => navigate("/")}
+          variant="outline"
+        >
+          Cancel
+        </Button>
+      </aside>
     </section>
   );
 }
