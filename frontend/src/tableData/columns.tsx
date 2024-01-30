@@ -1,7 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import dayjs from "dayjs";
 import { TodosType } from "types/todos";
-import { ChevronsUpDown, MoreHorizontal } from "lucide-react";
+import { ChevronsUpDown, MoreHorizontal, MoveUp, MoveDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -11,6 +11,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  UtilsPriorityDisplay,
+  UtilsStatusDisplay,
+} from "@/utils/Utils.DisplayStats";
 
 export const columns: ColumnDef<TodosType>[] = [
   //   {
@@ -26,57 +30,140 @@ export const columns: ColumnDef<TodosType>[] = [
             <Button variant="ghost" className="h-8 px-2">
               {/* <span className="sr-only"></span> */}
               Title
-              <ChevronsUpDown className="ms-2 h-4 w-4" />
+              {column.getIsSorted() === "asc" && (
+                <MoveUp className="ms-2 h-3 w-3" />
+              )}
+              {column.getIsSorted() === "desc" && (
+                <MoveDown className="ms-2 h-3 w-3" />
+              )}
+              {column.getIsSorted() !== "asc" &&
+                column.getIsSorted() !== "desc" && (
+                  <ChevronsUpDown className="ms-2 h-4 w-4" />
+                )}
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() =>
-                column.toggleSorting(column.getIsSorted() === "asc")
-              }
-            >
-              Asc
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() =>
-                column.toggleSorting(column.getIsSorted() === "asc")
-              }
-            >
-              Desc
-            </DropdownMenuItem>
+            <DropdownMenuLabel>Sort Title</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() =>
+                column.toggleSorting(column.getIsSorted() === "asc")
+              }
+            >
+              <MoveUp className="me-2 h-3 w-3" /> Asc
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() =>
+                column.toggleSorting(column.getIsSorted() === "asc")
+              }
+            >
+              <MoveDown className="me-2 h-3 w-3" /> Desc
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-        // <Button
-        //   variant="ghost"
-        //   onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        // >
-        //   Title
-        //   <ArrowUpDown className="ml-2 h-4 w-4" />
-        // </Button>
       );
     },
   },
   {
     accessorKey: "Status",
-    header: "Status",
+    // header: "Status",
+    header: ({ column }) => {
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 px-2">
+              {/* <span className="sr-only"></span> */}
+              Status
+              {column.getIsSorted() === "asc" && (
+                <MoveUp className="ms-2 h-3 w-3" />
+              )}
+              {column.getIsSorted() === "desc" && (
+                <MoveDown className="ms-2 h-3 w-3" />
+              )}
+              {column.getIsSorted() !== "asc" &&
+                column.getIsSorted() !== "desc" && (
+                  <ChevronsUpDown className="ms-2 h-4 w-4" />
+                )}
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>Sort Title</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              onClick={() =>
+                column.toggleSorting(column.getIsSorted() === "asc")
+              }
+            >
+              <MoveUp className="me-2 h-3 w-3" /> Asc
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() =>
+                column.toggleSorting(column.getIsSorted() === "asc")
+              }
+            >
+              <MoveDown className="me-2 h-3 w-3" /> Desc
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      );
+    },
+    cell: ({ row }) => {
+      return <div>{UtilsStatusDisplay(row.renderValue("Status"), true)}</div>;
+    },
   },
   {
     accessorKey: "Priority",
-    header: "Priority",
+    header: ({ column }) => {
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 px-2">
+              {/* <span className="sr-only"></span> */}
+              Priority
+              {column.getIsSorted() === "asc" && (
+                <MoveUp className="ms-2 h-3 w-3" />
+              )}
+              {column.getIsSorted() === "desc" && (
+                <MoveDown className="ms-2 h-3 w-3" />
+              )}
+              {column.getIsSorted() !== "asc" &&
+                column.getIsSorted() !== "desc" && (
+                  <ChevronsUpDown className="ms-2 h-4 w-4" />
+                )}
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>Sort Title</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              onClick={() =>
+                column.toggleSorting(column.getIsSorted() === "asc")
+              }
+            >
+              <MoveUp className="me-2 h-3 w-3" /> Asc
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onClick={() =>
+                column.toggleSorting(column.getIsSorted() === "asc")
+              }
+            >
+              <MoveDown className="me-2 h-3 w-3" /> Desc
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      );
+    },
+    cell: ({ row }) => {
+      return <div>{UtilsPriorityDisplay(row.renderValue("Priority"))}</div>;
+    },
   },
   {
     accessorKey: "DueDate",
     header: "DueDate",
     cell: ({ row }) => {
-      const DueDate = parseFloat(row.getValue("DueDate"));
-
       return (
         <div className="text-blue-400">
-          {dayjs(DueDate).format("ddd, MMM D, YYYY h:mm A")}
+          {dayjs(row.renderValue("DueDate")).format("ddd, MMM D, YYYY")}
         </div>
       );
     },

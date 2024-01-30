@@ -6,7 +6,7 @@ export function UtilsPriorityDisplay(priority: number) {
       return (
         <Badge
           variant="default"
-          className="flex items-center bg-yellow-500 font-bold"
+          className="flex items-center justify-center bg-yellow-500 font-bold "
         >
           Low
         </Badge>
@@ -15,7 +15,7 @@ export function UtilsPriorityDisplay(priority: number) {
       return (
         <Badge
           variant="default"
-          className="flex items-center bg-green-500 font-bold"
+          className="flex items-center justify-center bg-green-500 font-bold"
         >
           Medium
         </Badge>
@@ -24,7 +24,7 @@ export function UtilsPriorityDisplay(priority: number) {
       return (
         <Badge
           variant="default"
-          className="flex items-center bg-red-500 font-bold"
+          className="flex items-center justify-center bg-red-500 font-bold"
         >
           High
         </Badge>
@@ -61,37 +61,37 @@ export function UtilsStatusDisplay(status: number, displayName: boolean) {
     case 1:
       return (
         <div className="flex gap-1">
-          {displayName && "Pending"}
           <span className="flex h-3 w-3 translate-y-1 rounded-full bg-yellow-500" />
+          {displayName && "Pending"}
         </div>
       );
     case 2:
       return (
         <div className="flex gap-1">
-          {displayName && "InProgress"}
           <span className="flex h-3 w-3 translate-y-1 rounded-full bg-blue-500" />
+          {displayName && "InProgress"}
         </div>
       );
     case 3:
       return (
         <div className="flex gap-1">
-          {displayName && "Completed"}
           <span className="flex h-3 w-3 translate-y-1 rounded-full bg-green-500" />
+          {displayName && "Completed"}
         </div>
       );
     case 4:
       return (
         <div className="flex gap-1">
-          {displayName && "Cancelled"}
           <span className="flex h-3 w-3 translate-y-1 rounded-full bg-red-500" />
+          {displayName && "Cancelled"}
         </div>
       );
 
     default:
       return (
         <div className="flex gap-1">
-          Undecided
           <span className="flex h-3 w-3 translate-y-1 rounded-full bg-gray-500" />
+          Undecided
         </div>
       );
   }
